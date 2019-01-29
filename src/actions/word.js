@@ -23,8 +23,8 @@ export const fetchWord = (id) => (dispatch, getState) => {
         }
     })
         .then(res => normalizeResponseErrors(res))
-        .then(res => console.log(res.json()))
-        .then(({data}) => dispatch(fetchWordSuccess(data)))
+        .then(res => res.json())
+        .then(data => dispatch(fetchWordSuccess(data)))
         .catch(err => {
             dispatch(fetchWordError(err));
         });

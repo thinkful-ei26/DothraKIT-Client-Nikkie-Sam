@@ -4,7 +4,7 @@ import {
 } from '../actions/word';
 
 const initialState = {
-    data: '',
+    data: {},
     error: null
 };
 

@@ -38,7 +38,7 @@ export class Dashboard extends React.Component {
             <Wrapper>
               <HeaderText>Welcome {this.props.name}</HeaderText>
               <Button primary onClick={() => this.logOut()}>Log Out</Button>
-              <DothrakiWord>{this.props.word[1][0]}</DothrakiWord>
+              <DothrakiWord>{this.props.word}</DothrakiWord>
               <AnswerBox type='text'></AnswerBox>
               <Button  onClick={() => this.guess()}>Guess</Button>
 
@@ -54,7 +54,8 @@ const mapStateToProps = state => {
     return {
         username: state.auth.currentUser.username,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
-        word: state.auth.currentUser.words,
+        // word: state.auth.currentUser.words.
+        word: state.word.data[0],
         id: state.auth.currentUser.id,
         loggedIn: state.auth.currentUser !== null
     };
