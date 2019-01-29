@@ -19,6 +19,7 @@ export const fetchWordError = error => ({
 });
 
 export const fetchWord = (id) => (dispatch, getState) => {
+    console.log('FETCHING WORD ACTION');
     const authToken = getState().auth.authToken;
     dispatch(fetchWordRequest())
     return fetch(`${API_BASE_URL}/word/${id}`, {
@@ -53,21 +54,23 @@ export const guessWordRequest = () => ({
 });
 
 export const guessWord = (id, answer) => (dispatch, getState) => {
+    console.log('GUESSING WORD ACTION', answer);
     const authToken = getState().auth.authToken;
     dispatch(guessWordRequest());
     return fetch(`${API_BASE_URL}/word/${id}`, {
         method: 'PUT',
         headers: {
             // Provide our auth token as credentials
-            Authorization: `Bearer ${authToken}`
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(answer)
-        
+        body: JSON.stringify(answer)     
     })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        // .then(data => dispatch(guessWordSuccess(data)))
-        .then(()=> dispatch(fetchWord(id)))
+        .then(()=>{
+            setTimeout(() =>(dispatch(fetchWord(id))), 3000);
+        })
+
+
         .catch(err => {
             dispatch(guessWordError(err));
         });

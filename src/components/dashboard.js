@@ -19,6 +19,10 @@ export class Dashboard extends React.Component {
         this.props.dispatch(fetchWord(this.props.id));
     }
 
+    componentDidUpdate(){
+        this.answerInput.value = "";
+    }
+
     logOut() {
         this.props.dispatch(clearAuth());
         clearAuthToken();
@@ -45,7 +49,8 @@ export class Dashboard extends React.Component {
         }
         console.log('>>>>',answer)
         this.props.dispatch(guessWord(this.props.id, answer))
-        // this.props.dispatch(fet)
+        
+        //settimeout to show their stats and then dispatch the fetchword
       }
     
 
