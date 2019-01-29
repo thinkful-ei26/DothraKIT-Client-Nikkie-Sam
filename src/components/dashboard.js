@@ -9,11 +9,13 @@ import AnswerBox from './styled-components/AnswerBox';
 import DothrakiWord from './styled-components/DothrakiWord';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
-import {fetchWord} from '../actions/word';
+import {fetchWord, guessWord} from '../actions/word';
+
 
 export class Dashboard extends React.Component {
-    
+       
     componentDidMount() {
+        console.log('the id is', this.props.id)
         this.props.dispatch(fetchWord(this.props.id));
     }
 
@@ -22,9 +24,30 @@ export class Dashboard extends React.Component {
         clearAuthToken();
     }
 
-    guess() {
-
-    }
+    guess(){
+        let answer = {}
+        
+        console.log(this.answerInput.value)
+        if (this.answerInput.value === this.props.word.data.english){
+            answer = {
+                currentCorrect: true,
+                totalCorrect: (this.props.word.data.totalCorrect +1),
+                totalWrong: (this.props.word.data.totalWrong),
+                next: null,
+            }; 
+        }else {
+            answer = {
+                currentCorrect: false,
+                totalCorrect: (this.props.word.data.totalCorrect),
+                totalWrong: (this.props.word.data.totalWrong + 1),
+                next: null,
+            }
+        }
+        console.log('>>>>',answer)
+        this.props.dispatch(guessWord(this.props.id, answer))
+        // this.props.dispatch(fet)
+      }
+    
 
     render() {
 
@@ -38,9 +61,9 @@ export class Dashboard extends React.Component {
             <Wrapper>
               <HeaderText>Welcome {this.props.name}</HeaderText>
               <Button primary onClick={() => this.logOut()}>Log Out</Button>
-              <DothrakiWord>{this.props.word}</DothrakiWord>
-              <AnswerBox type='text'></AnswerBox>
-              <Button  onClick={() => this.guess()}>Guess</Button>
+              <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
+              <AnswerBox ref={input => this.answerInput = input}  type='text'></AnswerBox>
+              <Button onClick={() => this.guess()}>Guess</Button>
 
             </Wrapper>
           </ThemeProvider>
@@ -54,8 +77,7 @@ const mapStateToProps = state => {
     return {
         username: state.auth.currentUser.username,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
-        // word: state.auth.currentUser.words.
-        word: state.word.data[0],
+        word: state.word,
         id: state.auth.currentUser.id,
         loggedIn: state.auth.currentUser !== null
     };
