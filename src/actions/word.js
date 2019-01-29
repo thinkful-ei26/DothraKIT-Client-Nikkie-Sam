@@ -42,6 +42,14 @@ export const fetchWord = (id) => (dispatch, getState) => {
 //     type: GUESS_WORD_SUCCESS,
 // });
 
+export const DISPLAY_FEEDBACK = 'DISPLAY_FEEDBACK';
+export const displayFeedback = (bool) => ({
+    type: DISPLAY_FEEDBACK,
+    bool
+});
+
+
+
 export const GUESS_WORD_ERROR = 'GUESS_WORD_ERROR';
 export const guessWordError = error => ({
     type: GUESS_WORD_ERROR,
@@ -67,7 +75,8 @@ export const guessWord = (id, answer) => (dispatch, getState) => {
         body: JSON.stringify(answer)     
     })
         .then(()=>{
-            setTimeout(() =>(dispatch(fetchWord(id))), 3000);
+            // setTimeout(() =>(dispatch(fetchWord(id))), 3000);
+            dispatch(displayFeedback(true))
         })
 
 

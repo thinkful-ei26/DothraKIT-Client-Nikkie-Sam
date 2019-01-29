@@ -63,12 +63,15 @@ export class Dashboard extends React.Component {
 
         return (
             <ThemeProvider theme={theme}>
-            <Wrapper>
+            <Wrapper> 
               <HeaderText>Welcome {this.props.name}</HeaderText>
               <Button primary onClick={() => this.logOut()}>Log Out</Button>
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <AnswerBox ref={input => this.answerInput = input}  type='text'></AnswerBox>
-              <Button onClick={() => this.guess()}>Guess</Button>
+        {!this.props.displayFeedback && <Button onClick={() => this.guess()}>Guess</Button>}
+        {/* {this.props.displayFeedback && <Button onClick={() => this.nextWord()}>Guess</Button>} */}
+
+
 
             </Wrapper>
           </ThemeProvider>
@@ -84,7 +87,8 @@ const mapStateToProps = state => {
         name: `${currentUser.firstName} ${currentUser.lastName}`,
         word: state.word,
         id: state.auth.currentUser.id,
-        loggedIn: state.auth.currentUser !== null
+        loggedIn: state.auth.currentUser !== null,
+        displayFeedback: state.word.displayFeedback,
     };
 };
 

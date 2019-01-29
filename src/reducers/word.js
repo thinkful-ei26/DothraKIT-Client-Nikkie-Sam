@@ -3,13 +3,15 @@ import {
     FETCH_WORD_SUCCESS,
     FETCH_WORD_ERROR,
     GUESS_WORD_ERROR,
-    GUESS_WORD_REQUEST
+    GUESS_WORD_REQUEST,
+    DISPLAY_FEEDBACK
 } from '../actions/word';
 
 const initialState = {
     data: {},
     error: null,
     loading: false,
+    displayFeedback: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -35,6 +37,11 @@ export default function reducer(state = initialState, action) {
             loading: true,
         });
     } 
+    else if (action.type === DISPLAY_FEEDBACK) {
+        return Object.assign({}, state, {
+            displayFeedback: action.bool
+        });
+    }
     else if (action.type === GUESS_WORD_ERROR) {
         return Object.assign({}, state, {
             error: action.error,
