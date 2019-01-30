@@ -14,17 +14,7 @@ import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
 
-
-export class Dashboard extends React.Component {
-    constructor(props){
-        super(props)
-
-        this.state={
-            feedback:"",
-            answer:"",
-        }
-    }
-       
+export class Dashboard extends React.Component {       
     componentDidMount() {
         console.log('the id is', this.props.id)
         this.props.dispatch(fetchWord(this.props.id));
@@ -35,34 +25,11 @@ export class Dashboard extends React.Component {
         clearAuthToken();
     }
 
-    guess(){
-        let answer = {}
-        
+    guess(){        
         console.log(this.answerInput.value)
-        if (this.answerInput.value === this.props.word.data.english){
-            answer = {
-                currentCorrect: true,
-                totalCorrect: (this.props.word.data.totalCorrect +1),
-                totalTries: (this.props.word.data.totalTries +1),
-                totalWrong: (this.props.word.data.totalWrong),
-                next: this.props.word.data.next,
-                mValue: this.props.word.data.mValue*2,
-            }; 
-            this.setState({feedback:"Correct!", answer: answer})
-        }else {
-            answer = {
-                currentCorrect: false,
-                totalCorrect: (this.props.word.data.totalCorrect),
-                totalWrong: (this.props.word.data.totalWrong + 1),
-                totalTries: (this.props.word.data.totalTries + 1),
-                next: this.props.word.data.next,
-                mValue: 1,
-            }
-            this.setState({feedback:"Incorrect!", answer: answer})
-
-        }
-        console.log('>>>>',answer)
-        this.props.dispatch(guessWord(this.props.id, answer))        
+        this.props.dispatch(guessWord(this.props.id, this.answerInput.value))   
+        //to refactor: when I dispatch guessWord, I'll be sending back just the user's answer and the word - no other data required. It should get a response back about whether it was true(correct) or false(incorrect), and depending on that change the feedback    
+        //to refactor: fetchWord should just fetch the word in dothraki and english, no other data.
       }
 
       handleNext(){
@@ -72,7 +39,7 @@ export class Dashboard extends React.Component {
       }
     
     render() {
-
+        console.log('FEEDBACK IS', this.props.feedback);
         const theme = {
             font: "Calibri"
           };
@@ -91,9 +58,9 @@ export class Dashboard extends React.Component {
               {!this.props.displayFeedback && <Button primary onClick={() => this.guess()}>Guess</Button>}
               {this.props.displayFeedback && 
               <Feedback>
-                <p>{this.state.feedback}</p>
-                {this.state.feedback==="Incorrect!" && <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> }
-                <p>Your average score on this word is: {((parseInt(this.state.answer.totalCorrect))/(parseInt(this.state.answer.totalTries)))*100}% </p>
+                <p>{this.props.feedback}</p>
+                {this.props.feedback==="Incorrect!" && <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> }
+                <p>Your average score on this word is: {this.props.individualWordScore}% </p>
               </Feedback>
               }
               {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
@@ -113,6 +80,8 @@ const mapStateToProps = state => {
         id: state.auth.currentUser.id,
         loggedIn: state.auth.currentUser !== null,
         displayFeedback: state.word.displayFeedback,
+        feedback: state.word.feedback,
+        individualWordScore: state.word.individualWordScore
     };
 };
 

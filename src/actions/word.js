@@ -37,18 +37,18 @@ export const fetchWord = (id) => (dispatch, getState) => {
         });
 };
 
-// export const GUESS_WORD_SUCCESS = 'GUESS_WORD_SUCCESS';
-// export const guessWordSuccess = () => ({
-//     type: GUESS_WORD_SUCCESS,
-// });
+export const GUESS_WORD_SUCCESS = 'GUESS_WORD_SUCCESS';
+export const guessWordSuccess = (bool, individualWordScore) => ({
+    type: GUESS_WORD_SUCCESS,
+    bool,
+    individualWordScore
+});
 
 export const DISPLAY_FEEDBACK = 'DISPLAY_FEEDBACK';
 export const displayFeedback = (bool) => ({
     type: DISPLAY_FEEDBACK,
-    bool
+    bool,
 });
-
-
 
 export const GUESS_WORD_ERROR = 'GUESS_WORD_ERROR';
 export const guessWordError = error => ({
@@ -62,7 +62,7 @@ export const guessWordRequest = () => ({
 });
 
 export const guessWord = (id, answer) => (dispatch, getState) => {
-    console.log('GUESSING WORD ACTION', answer);
+    console.log('GUESSING WORD ACTION SENDING', JSON.stringify(answer) );
     const authToken = getState().auth.authToken;
     dispatch(guessWordRequest());
     return fetch(`${API_BASE_URL}/word/${id}`, {
@@ -72,14 +72,14 @@ export const guessWord = (id, answer) => (dispatch, getState) => {
             Authorization: `Bearer ${authToken}`,
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(answer)     
+        body: JSON.stringify({answer: answer})     
     })
-        .then(()=>{
-            // setTimeout(() =>(dispatch(fetchWord(id))), 3000);
-            dispatch(displayFeedback(true))
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((res)=>{
+            console.log('THE RES WITH BOTH IS', res);
+            dispatch(guessWordSuccess(res.answerCorrect, res.individualWordScore))
         })
-
-
         .catch(err => {
             dispatch(guessWordError(err));
         });
