@@ -9,7 +9,7 @@ import AnswerBox from './styled-components/AnswerBox';
 import DothrakiWord from './styled-components/DothrakiWord';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
-import {fetchWord, guessWord} from '../actions/word';
+import {fetchWord, guessWord, displayFeedback} from '../actions/word';
 
 
 export class Dashboard extends React.Component {
@@ -52,8 +52,12 @@ export class Dashboard extends React.Component {
         
         //settimeout to show their stats and then dispatch the fetchword
       }
-    
 
+      handleNext(){
+          this.props.dispatch(displayFeedback(false));
+          this.props.dispatch(fetchWord(this.props.id));
+      }
+    
     render() {
 
         const theme = {
@@ -68,7 +72,8 @@ export class Dashboard extends React.Component {
               <Button primary onClick={() => this.logOut()}>Log Out</Button>
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <AnswerBox ref={input => this.answerInput = input}  type='text'></AnswerBox>
-        {!this.props.displayFeedback && <Button onClick={() => this.guess()}>Guess</Button>}
+              {!this.props.displayFeedback && <Button onClick={() => this.guess()}>Guess</Button>}
+              {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
         {/* {this.props.displayFeedback && <Button onClick={() => this.nextWord()}>Guess</Button>} */}
 
 
