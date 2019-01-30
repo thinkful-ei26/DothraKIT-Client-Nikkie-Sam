@@ -43,7 +43,8 @@ export class Dashboard extends React.Component {
                 totalCorrect: (this.props.word.data.totalCorrect +1),
                 totalTries: (this.props.word.data.totalTries +1),
                 totalWrong: (this.props.word.data.totalWrong),
-                next: null,
+                next: this.props.word.data.next,
+                mValue: this.props.word.data.mValue*2,
             }; 
             this.setState({feedback:"Correct!", answer: answer})
         }else {
@@ -52,7 +53,8 @@ export class Dashboard extends React.Component {
                 totalCorrect: (this.props.word.data.totalCorrect),
                 totalWrong: (this.props.word.data.totalWrong + 1),
                 totalTries: (this.props.word.data.totalTries + 1),
-                next: null,
+                next: this.props.word.data.next,
+                mValue: 1,
             }
             this.setState({feedback:"Incorrect!", answer: answer})
 
