@@ -38,6 +38,7 @@ export default function reducer(state = initialState, action) {
         });
     } 
     else if (action.type === DISPLAY_FEEDBACK) {
+        console.log('DISPLAY FEEDBACK REDUCER', action.bool);
         return Object.assign({}, state, {
             displayFeedback: action.bool
         });

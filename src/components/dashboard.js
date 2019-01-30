@@ -7,20 +7,25 @@ import Wrapper from "./styled-components/Wrapper";
 import HeaderText from "./styled-components/HeaderText";
 import AnswerBox from './styled-components/AnswerBox';
 import DothrakiWord from './styled-components/DothrakiWord';
+import Feedback from './styled-components/Feedback';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
 
 
 export class Dashboard extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.state={
+            feedback:"",
+            answer:"",
+        }
+    }
        
     componentDidMount() {
         console.log('the id is', this.props.id)
         this.props.dispatch(fetchWord(this.props.id));
-    }
-
-    componentDidUpdate(){
-        this.answerInput.value = "";
     }
 
     logOut() {
@@ -36,26 +41,30 @@ export class Dashboard extends React.Component {
             answer = {
                 currentCorrect: true,
                 totalCorrect: (this.props.word.data.totalCorrect +1),
+                totalTries: (this.props.word.data.totalTries +1),
                 totalWrong: (this.props.word.data.totalWrong),
                 next: null,
             }; 
+            this.setState({feedback:"Correct!", answer: answer})
         }else {
             answer = {
                 currentCorrect: false,
                 totalCorrect: (this.props.word.data.totalCorrect),
                 totalWrong: (this.props.word.data.totalWrong + 1),
+                totalTries: (this.props.word.data.totalTries + 1),
                 next: null,
             }
+            this.setState({feedback:"Incorrect!", answer: answer})
+
         }
         console.log('>>>>',answer)
-        this.props.dispatch(guessWord(this.props.id, answer))
-        
-        //settimeout to show their stats and then dispatch the fetchword
+        this.props.dispatch(guessWord(this.props.id, answer))        
       }
 
       handleNext(){
-          this.props.dispatch(displayFeedback(false));
-          this.props.dispatch(fetchWord(this.props.id));
+        this.answerInput.value = "";
+        this.props.dispatch(displayFeedback(false));
+        this.props.dispatch(fetchWord(this.props.id));
       }
     
     render() {
@@ -63,7 +72,6 @@ export class Dashboard extends React.Component {
         const theme = {
             font: "Calibri"
           };
-
 
         return (
             <ThemeProvider theme={theme}>
@@ -73,11 +81,14 @@ export class Dashboard extends React.Component {
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <AnswerBox ref={input => this.answerInput = input}  type='text'></AnswerBox>
               {!this.props.displayFeedback && <Button onClick={() => this.guess()}>Guess</Button>}
+              {this.props.displayFeedback && 
+              <Feedback>
+                <p>{this.state.feedback}</p>
+                {this.state.feedback==="Incorrect!" && <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> }
+                <p>Your average score on this word is: {((parseInt(this.state.answer.totalCorrect))/(parseInt(this.state.answer.totalTries)))*100}% </p>
+              </Feedback>
+              }
               {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
-        {/* {this.props.displayFeedback && <Button onClick={() => this.nextWord()}>Guess</Button>} */}
-
-
-
             </Wrapper>
           </ThemeProvider>
         );
