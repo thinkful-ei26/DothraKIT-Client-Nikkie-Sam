@@ -7,6 +7,8 @@ import Wrapper from "./styled-components/Wrapper";
 import HeaderText from "./styled-components/HeaderText";
 import AnswerBox from './styled-components/AnswerBox';
 import DothrakiWord from './styled-components/DothrakiWord';
+import Nav from './styled-components/Nav';
+import Option from './styled-components/Option'
 import Feedback from './styled-components/Feedback';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
@@ -78,11 +80,15 @@ export class Dashboard extends React.Component {
         return (
             <ThemeProvider theme={theme}>
             <Wrapper> 
+              <Nav>
+                  <Option>DothraKIT</Option>
+                  <Option>Progress</Option>
+                  <Option onClick={() => this.logOut()}>LogOut</Option>
+              </Nav>  
               <HeaderText>Welcome {this.props.name}</HeaderText>
-              <Button primary onClick={() => this.logOut()}>Log Out</Button>
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <AnswerBox ref={input => this.answerInput = input}  type='text'></AnswerBox>
-              {!this.props.displayFeedback && <Button onClick={() => this.guess()}>Guess</Button>}
+              {!this.props.displayFeedback && <Button primary onClick={() => this.guess()}>Guess</Button>}
               {this.props.displayFeedback && 
               <Feedback>
                 <p>{this.state.feedback}</p>
