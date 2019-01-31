@@ -13,6 +13,8 @@ import Feedback from './styled-components/Feedback';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
+import wrongGif from '../img/wrong.gif';
+import correctGif from '../img/correct.gif'
 
 export class Dashboard extends React.Component {       
     componentDidMount() {
@@ -57,11 +59,12 @@ export class Dashboard extends React.Component {
               <AnswerBox ref={input => this.answerInput = input}  type='text'></AnswerBox>
               {!this.props.displayFeedback && <Button primary onClick={() => this.guess()}>Guess</Button>}
               {this.props.displayFeedback && 
-              <Feedback>
+              (<Feedback>
                 <p>{this.props.feedback}</p>
-                {this.props.feedback==="Incorrect!" && <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> }
+                {this.props.feedback==="Incorrect!" && <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> && <img src={wrongGif}></img> }
+                {this.props.feedback==="Correct" && <img src={correctGif}></img>}
                 <p>Your average score on this word is: {this.props.individualWordScore}% </p>
-              </Feedback>
+              </Feedback>)
               }
               {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
             </Wrapper>
