@@ -45,7 +45,7 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             error: false,
-            feedback: action.bool===true ? "Correct" : "Incorrect!",
+            feedback: action.bool===true ? "Excellent!" : "You're Wrong!",
             individualWordScore: action.individualWordScore,
             displayFeedback: true,
         });

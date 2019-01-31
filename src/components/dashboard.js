@@ -16,7 +16,14 @@ import {fetchWord, guessWord, displayFeedback} from '../actions/word';
 import wrongGif from '../img/wrong.gif';
 import correctGif from '../img/correct.gif'
 
-export class Dashboard extends React.Component {       
+export class Dashboard extends React.Component {   
+    constructor(props){
+        super(props)
+
+        this.state = ({
+            disabled: false,
+        });
+    }    
     componentDidMount() {
         console.log('the id is', this.props.id)
         this.props.dispatch(fetchWord(this.props.id));
@@ -27,15 +34,16 @@ export class Dashboard extends React.Component {
         clearAuthToken();
     }
 
-    guess(){        
-        console.log(this.answerInput.value)
-        this.props.dispatch(guessWord(this.props.id, this.answerInput.value))   
-        //to refactor: when I dispatch guessWord, I'll be sending back just the user's answer and the word - no other data required. It should get a response back about whether it was true(correct) or false(incorrect), and depending on that change the feedback    
-        //to refactor: fetchWord should just fetch the word in dothraki and english, no other data.
+    guess(e){
+        e.preventDefault();
+        this.setState({disabled: true});
+        console.log(this.answerInput.value);
+        this.props.dispatch(guessWord(this.props.id, this.answerInput.value));
       }
 
       handleNext(){
         this.answerInput.value = "";
+        this.setState({disabled: false});
         this.props.dispatch(displayFeedback(false));
         this.props.dispatch(fetchWord(this.props.id));
       }
@@ -56,13 +64,30 @@ export class Dashboard extends React.Component {
               </Nav>  
               <HeaderText>Welcome {this.props.name}</HeaderText>
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
-              <AnswerBox ref={input => this.answerInput = input}  type='text'></AnswerBox>
-              {!this.props.displayFeedback && <Button primary onClick={() => this.guess()}>Guess</Button>}
+              <form>
+                <AnswerBox disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
+                {!this.props.displayFeedback && <Button type="submit" primary onClick={(e) => this.guess(e)}>Guess</Button>}
+              </form>
               {this.props.displayFeedback && 
               (<Feedback>
-                <p>{this.props.feedback}</p>
-                {this.props.feedback==="Incorrect!" && <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> && <img src={wrongGif}></img> }
-                {this.props.feedback==="Correct" && <img src={correctGif}></img>}
+                {
+                    this.props.feedback==="You're Wrong!" ?
+                    <div>
+                        <p>Yer ojila! {this.props.feedback}</p> 
+                        <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> 
+                        <img src={wrongGif}></img>
+                    </div> 
+                    : ""
+                }
+                {
+                    this.props.feedback==="Excellent!" ?
+                    <div>
+                        <p>Athdavrazar! {this.props.feedback}</p> 
+                        <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> 
+                        <img src={correctGif}></img>
+                    </div> 
+                    : ""
+                }
                 <p>Your average score on this word is: {this.props.individualWordScore}% </p>
               </Feedback>)
               }
