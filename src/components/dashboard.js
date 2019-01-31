@@ -16,6 +16,7 @@ import Feedback from './styled-components/Feedback';
 import Image from './styled-components/Image';
 import Paragraph from './styled-components/Paragraph';
 import Stats from './styled-components/Stats'
+import Strong from './styled-components/Strong'
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
@@ -91,22 +92,15 @@ export class Dashboard extends React.Component {
               {this.props.displayFeedback && 
               (<FeedbackSection correct={correct} wrong={wrong}>
                 {
-                    wrong ?
                     <Feedback>
-                        <Paragraph>Yer ojila! {this.props.feedback}</Paragraph> 
-                        <Paragraph>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</Paragraph> 
+                        {
+                            wrong ? <Paragraph>Yer ojila! {this.props.feedback}</Paragraph> : <Paragraph>Athdavrazar! {this.props.feedback}</Paragraph> 
+                        }
+                        <Paragraph>The correct translation for    <Strong dothraki>{this.props.word.data.dothraki}</Strong> is: <Strong>{this.props.word.data.english}</Strong></Paragraph> 
+                        <Stats>Your average score on this word is: {this.props.individualWordScore}% </Stats>
                         <Image src={wrongGif} alt="wrong gif"></Image>
                     </Feedback> 
-                    :
-                    correct ?
-                    <Feedback>
-                        <Paragraph>Athdavrazar! {this.props.feedback}</Paragraph> 
-                        <Paragraph>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</Paragraph> 
-                        <Image src={correctGif}></Image>
-                    </Feedback> 
-                    : ""
                 }
-                <Stats>Your average score on this word is: {this.props.individualWordScore}% </Stats>
               </FeedbackSection>)
               }
               {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}

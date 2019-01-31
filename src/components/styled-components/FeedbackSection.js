@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export default styled.div`
-  margin-right: auto;
-  margin-left: auto;
+  margin: 20px auto;
   width: 75%;
-  background-color: ${props => (props.correct ? "#4caf50" : "brown")};
+  background-color: ${props => (props.correct ? "#25633e" : "brown")};
+  padding: 20px 0px;
+  font-size: 20px;
 `;
