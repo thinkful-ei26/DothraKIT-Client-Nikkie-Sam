@@ -19,7 +19,7 @@ import Stats from './styled-components/Stats'
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
-import {fetchOverallProgress} from '../actions/overallProgress';
+import {fetchOverallProgress, setOverallProgress} from '../actions/overallProgress';
 
 import wrongGif from '../img/wrong.gif';
 import correctGif from '../img/correct.gif'
@@ -60,6 +60,9 @@ export class Dashboard extends React.Component {
         this.props.dispatch(fetchOverallProgress(this.props.id));
 
       }
+      exitOverall(){
+          this.props.dispatch(setOverallProgress())
+      }
     
     render() {
         console.log('FEEDBACK IS', this.props.feedback);
@@ -79,6 +82,7 @@ export class Dashboard extends React.Component {
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
               <HeaderText>Welcome {this.props.name}</HeaderText>
+              {this.props.overallFeedback && (<Stats>Your overall score is: {this.props.overallScore}% <Button onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <Form>
                 <AnswerBox disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
@@ -123,7 +127,9 @@ const mapStateToProps = state => {
         loggedIn: state.auth.currentUser !== null,
         displayFeedback: state.word.displayFeedback,
         feedback: state.word.feedback,
-        individualWordScore: state.word.individualWordScore
+        individualWordScore: state.word.individualWordScore,
+        overallFeedback: state.overallProgress.displayFeedback,
+        overallScore: state.overallProgress.data
     };
 };
 
