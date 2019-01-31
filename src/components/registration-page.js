@@ -15,13 +15,8 @@ export function RegistrationPage(props) {
         return <Redirect to="/dashboard" />;
     }
     return (
-<<<<<<< HEAD
        <Wrapper>
             <HeaderText>Register for DothraKIT</HeaderText>
-=======
-        <div className="home">
-            <h2>Register for DothraKIT</h2>
->>>>>>> 140b15b7959e08ee30e9deebb948988dc1be90ce
             <RegistrationForm />
             <Link to="/">Already have an Account?</Link>
         </Wrapper>
