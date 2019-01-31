@@ -13,6 +13,8 @@ import Feedback from './styled-components/Feedback';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
+import {fetchOverallProgress} from '../actions/overallProgress';
+
 
 export class Dashboard extends React.Component {       
     componentDidMount() {
@@ -37,6 +39,11 @@ export class Dashboard extends React.Component {
         this.props.dispatch(displayFeedback(false));
         this.props.dispatch(fetchWord(this.props.id));
       }
+
+      handleOverallProgress(){
+        this.props.dispatch(fetchOverallProgress(this.props.id));
+
+      }
     
     render() {
         console.log('FEEDBACK IS', this.props.feedback);
@@ -49,7 +56,7 @@ export class Dashboard extends React.Component {
             <Wrapper> 
               <Nav>
                   <Option>DothraKIT</Option>
-                  <Option>Progress</Option>
+                  <Option onClick={() => this.handleOverallProgress()}>Progress</Option>
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
               <HeaderText>Welcome {this.props.name}</HeaderText>

@@ -6,6 +6,8 @@ import authReducer from './reducers/auth';
 import protectedDataReducer from './reducers/protected-data';
 import wordReducer from './reducers/word';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
+import overallProgressReducer from './reducers/overallProgress';
+
 
 const store = createStore(
     combineReducers({
@@ -13,6 +15,7 @@ const store = createStore(
         auth: authReducer,
         protectedData: protectedDataReducer,
         word: wordReducer,
+        overallProgress: overallProgressReducer,
     }),
     applyMiddleware(thunk)
 );
