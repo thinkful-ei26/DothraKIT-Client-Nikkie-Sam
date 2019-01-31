@@ -2,9 +2,13 @@ import styled from "styled-components";
 
 export default styled.div`
   margin: auto;
-  background-color: brown;
+  background-color: black;
+  color: white;
+  font-style: italic;
+  font-size: 35px;
   box-sizing: border-box;
   text-align: center;
   padding: 1em;
-  width: 100%;
+  width: 75%;
+  text-transform: capitalize;
 `;

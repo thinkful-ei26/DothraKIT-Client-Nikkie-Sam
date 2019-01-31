@@ -16,6 +16,7 @@ import Feedback from './styled-components/Feedback';
 import Image from './styled-components/Image';
 import Paragraph from './styled-components/Paragraph';
 import Stats from './styled-components/Stats'
+import Strong from './styled-components/Strong'
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
@@ -58,7 +59,6 @@ export class Dashboard extends React.Component {
 
       handleOverallProgress(){
         this.props.dispatch(fetchOverallProgress(this.props.id));
-
       }
       exitOverall(){
           this.props.dispatch(setOverallProgress())
@@ -67,7 +67,7 @@ export class Dashboard extends React.Component {
     render() {
         console.log('FEEDBACK IS', this.props.feedback);
         const theme = {
-            font: "Calibri"
+            fontFamily: 'Montserrat',
           };
 
         let wrong = this.props.feedback==="You're Wrong!";
@@ -77,36 +77,31 @@ export class Dashboard extends React.Component {
             <ThemeProvider theme={theme}>
             <Wrapper> 
               <Nav>
-                  <Option>DothraKIT</Option>
+                  <Option appTitle>DothraKIT</Option>
                   <Option onClick={() => this.handleOverallProgress()}>Progress</Option>
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
-              <HeaderText>Welcome {this.props.name}</HeaderText>
-              {this.props.overallFeedback && (<Stats>Your overall score is: {this.props.overallScore}% <Button onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
+              <HeaderText>Welcome {this.props.firstName}</HeaderText>
+              
+              {this.props.overallFeedback && (<Stats overall>{this.props.firstName}, your overall score is: <Strong>{this.props.overallScore}% </Strong><Button close onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
+
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <Form>
-                <AnswerBox disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
+                <AnswerBox placeholder="Guess here" disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
                 {!this.props.displayFeedback && <Button type="submit" onClick={(e) => this.guess(e)}>Guess</Button>}
               </Form>
               {this.props.displayFeedback && 
               (<FeedbackSection correct={correct} wrong={wrong}>
                 {
-                    wrong ?
                     <Feedback>
-                        <Paragraph>Yer ojila! {this.props.feedback}</Paragraph> 
-                        <Paragraph>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</Paragraph> 
+                        {
+                            wrong ? <Paragraph>Yer ojila! {this.props.feedback}</Paragraph> : <Paragraph>Athdavrazar! {this.props.feedback}</Paragraph> 
+                        }
+                        <Paragraph>The correct translation for    <Strong dothraki>{this.props.word.data.dothraki}</Strong> is: <Strong>{this.props.word.data.english}</Strong></Paragraph> 
+                        <Stats>Your average score on this word is: <Strong>{this.props.individualWordScore}%</Strong> </Stats>
                         <Image src={wrongGif} alt="wrong gif"></Image>
                     </Feedback> 
-                    :
-                    correct ?
-                    <Feedback>
-                        <Paragraph>Athdavrazar! {this.props.feedback}</Paragraph> 
-                        <Paragraph>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</Paragraph> 
-                        <Image src={correctGif}></Image>
-                    </Feedback> 
-                    : ""
                 }
-                <Stats>Your average score on this word is: {this.props.individualWordScore}% </Stats>
               </FeedbackSection>)
               }
               {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
@@ -121,6 +116,7 @@ const mapStateToProps = state => {
     console.log(state)
     return {
         username: state.auth.currentUser.username,
+        firstName: currentUser.firstName,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
         word: state.word,
         id: state.auth.currentUser.id,

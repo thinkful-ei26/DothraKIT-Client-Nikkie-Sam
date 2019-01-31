@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default styled.section`
-  width: 320px;
+  width: 75%;
   margin: auto;
+  text-align: center;
 `;
