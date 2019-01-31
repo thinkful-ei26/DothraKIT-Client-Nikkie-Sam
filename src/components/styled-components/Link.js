@@ -4,6 +4,6 @@ import {Link, Redirect} from 'react-router-dom';
 
 export default styled(Link)`
   margin-top:10px;
-  color:green;
+  color:black;
   text-align: center;
 `;
