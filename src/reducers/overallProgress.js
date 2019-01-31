@@ -2,6 +2,7 @@ import {
     FETCH_OVERALLPROGRESS_REQUEST,
     FETCH_OVERALLPROGRESS_SUCCESS,
     FETCH_OVERALLPROGRESS_ERROR,
+    SET_OVERALL_FEEDBACK
   
 } from '../actions/overallProgress';
 
@@ -17,7 +18,8 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             data: action.data,
             error: null,
-            loading: false
+            loading: false,
+            displayFeedback: true,
         });
     } else if (action.type === FETCH_OVERALLPROGRESS_ERROR) {
         return Object.assign({}, state, {
@@ -28,6 +30,11 @@ export default function reducer(state = initialState, action) {
     else if (action.type === FETCH_OVERALLPROGRESS_REQUEST) {
         return Object.assign({}, state, {
             loading: true,
+        });
+    } 
+    else if (action.type === SET_OVERALL_FEEDBACK) {
+        return Object.assign({}, state, {
+            displayFeedback: false,
         });
     } 
     return state;

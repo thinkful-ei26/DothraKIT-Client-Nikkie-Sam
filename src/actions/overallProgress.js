@@ -1,6 +1,11 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+export const SET_OVERALL_FEEDBACK = 'SET_OVERALL_FEEDBACK';
+export const setOverallProgress = () => ({
+    type: SET_OVERALL_FEEDBACK,
+});
+
 export const FETCH_OVERALLPROGRESS_REQUEST = 'FETCH_OVERALLPROGRESS_REQUEST';
 export const fetchOverallProgressRequest = () => ({
     type: FETCH_OVERALLPROGRESS_REQUEST,
