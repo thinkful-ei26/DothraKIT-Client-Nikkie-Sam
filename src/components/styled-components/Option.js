@@ -6,8 +6,9 @@ export default styled.a`
   letter-spacing: ${props => (props.appTitle && "4px")};
   padding: 20px;
   transition: 1s;
+  margin: auto;
   &:hover{
-    background-color:white;
+    background-color:#e2c68e;
     color: black; 
     cursor: pointer;
   }
