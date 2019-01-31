@@ -6,9 +6,9 @@ export default styled.div`
   color: white;
   font-style: italic;
   font-size: 35px;
+  padding: 10px;
   box-sizing: border-box;
   text-align: center;
-  padding: 1em;
   width: 75%;
   text-transform: capitalize;
 `;

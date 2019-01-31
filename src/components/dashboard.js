@@ -109,7 +109,7 @@ export class Dashboard extends React.Component {
                             <Paragraph>The correct translation for    <Strong dothraki>{this.props.word.data.dothraki}</Strong> is: <Strong>{this.props.word.data.english}</Strong></Paragraph> 
                             <Stats>Your average score on this word is: <Strong>{this.props.individualWordScore}%</Strong> </Stats>
                             {
-                                wrong ?  <Image src={wrongGif} alt="wrong gif"></Image> :  <Image src={correctGif} alt="correct gif"></Image>
+                                wrong ?  <Image gif src={wrongGif} alt="wrong gif"></Image> :  <Image gif src={correctGif} alt="correct gif"></Image>
                             }
                         
                         </Feedback> 
