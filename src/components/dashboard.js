@@ -15,8 +15,9 @@ import Form from './styled-components/Form';
 import Feedback from './styled-components/Feedback';
 import Image from './styled-components/Image';
 import Paragraph from './styled-components/Paragraph';
-import Stats from './styled-components/Stats'
-import Strong from './styled-components/Strong'
+import Stats from './styled-components/Stats';
+import Strong from './styled-components/Strong';
+import About from './styled-components/About'
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
@@ -24,6 +25,7 @@ import {fetchOverallProgress, setOverallProgress} from '../actions/overallProgre
 
 import wrongGif from '../img/wrong.gif';
 import correctGif from '../img/correct.gif'
+import sword from '../img/sword.png';
 
 export class Dashboard extends React.Component {   
     constructor(props){
@@ -81,30 +83,42 @@ export class Dashboard extends React.Component {
                   <Option onClick={() => this.handleOverallProgress()}>Progress</Option>
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
-              <HeaderText>Welcome {this.props.firstName}</HeaderText>
-              
-              {this.props.overallFeedback && (<Stats overall>{this.props.firstName}, your overall score is: <Strong>{this.props.overallScore}% </Strong><Button close onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
+              <Wrapper parent> 
+              <Wrapper child>
+                <HeaderText>Welcome {this.props.firstName}</HeaderText>
+                <About>
+                    <Image sword src={sword}></Image>
+                    <Paragraph rules>The rules are simple.</Paragraph>
+                    <Image sword flipHoriz src={sword}></Image>
+                </About>
+                
+                {this.props.overallFeedback && (<Stats overall>{this.props.firstName}, your overall score is: <Strong>{this.props.overallScore}% </Strong><Button close onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
 
-              <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
-              <Form>
-                <AnswerBox placeholder="Guess here" disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
-                {!this.props.displayFeedback && <Button type="submit" onClick={(e) => this.guess(e)}>Guess</Button>}
-              </Form>
-              {this.props.displayFeedback && 
-              (<FeedbackSection correct={correct} wrong={wrong}>
-                {
-                    <Feedback>
-                        {
-                            wrong ? <Paragraph>Yer ojila! {this.props.feedback}</Paragraph> : <Paragraph>Athdavrazar! {this.props.feedback}</Paragraph> 
-                        }
-                        <Paragraph>The correct translation for    <Strong dothraki>{this.props.word.data.dothraki}</Strong> is: <Strong>{this.props.word.data.english}</Strong></Paragraph> 
-                        <Stats>Your average score on this word is: <Strong>{this.props.individualWordScore}%</Strong> </Stats>
-                        <Image src={wrongGif} alt="wrong gif"></Image>
-                    </Feedback> 
+                <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
+                <Form>
+                    <AnswerBox primary placeholder="Guess here" disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
+                    {!this.props.displayFeedback && <Button type="submit" onClick={(e) => this.guess(e)}>Guess</Button>}
+                </Form>
+                {this.props.displayFeedback && 
+                (<FeedbackSection correct={correct} wrong={wrong}>
+                    {
+                        <Feedback>
+                            {
+                                wrong ? <Paragraph>Yer ojila! {this.props.feedback}</Paragraph> : <Paragraph>Athdavrazar! {this.props.feedback}</Paragraph> 
+                            }
+                            <Paragraph>The correct translation for    <Strong dothraki>{this.props.word.data.dothraki}</Strong> is: <Strong>{this.props.word.data.english}</Strong></Paragraph> 
+                            <Stats>Your average score on this word is: <Strong>{this.props.individualWordScore}%</Strong> </Stats>
+                            {
+                                wrong ?  <Image src={wrongGif} alt="wrong gif"></Image> :  <Image src={correctGif} alt="correct gif"></Image>
+                            }
+                        
+                        </Feedback> 
+                    }
+                </FeedbackSection>)
                 }
-              </FeedbackSection>)
-              }
-              {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
+                {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
+              </Wrapper>
+            </Wrapper>
             </Wrapper>
           </ThemeProvider>
         );

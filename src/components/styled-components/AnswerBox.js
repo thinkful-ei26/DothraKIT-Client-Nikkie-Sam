@@ -8,12 +8,14 @@ export default styled.input`
   background: papayawhip;
   box-sizing: border-box;
   text-align: center;
-  border: none;
+  border: 1px solid transparent;
   font-size: 25px;
   font-family: 'Montserrat', sans-serif;
   transition: .5s;
-  &:hover, &:focus{
+  ${props => !props.disabled && `
+  &:hover {
     outline: 0;
     border: 2px solid black;
   }
+  `}
 `;
