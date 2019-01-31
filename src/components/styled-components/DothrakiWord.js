@@ -5,7 +5,7 @@ export default styled.div`
   background-color: black;
   color: white;
   font-style: italic;
-  font-size: 25px;
+  font-size: 35px;
   box-sizing: border-box;
   text-align: center;
   padding: 1em;
