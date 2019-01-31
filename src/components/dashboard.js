@@ -75,7 +75,7 @@ export class Dashboard extends React.Component {
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <Form>
                 <AnswerBox disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
-                {!this.props.displayFeedback && <Button type="submit" primary onClick={(e) => this.guess(e)}>Guess</Button>}
+                {!this.props.displayFeedback && <Button type="submit" onClick={(e) => this.guess(e)}>Guess</Button>}
               </Form>
               {this.props.displayFeedback && 
               (<FeedbackSection correct={correct} wrong={wrong}>
