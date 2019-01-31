@@ -77,7 +77,7 @@ export const guessWord = (id, answer) => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((res)=>{
-            console.log('THE RES WITH BOTH IS', res);
+            console.log('THE INDIV SCORE GOTTEN BACK IS',res.individualWordScore )
             dispatch(guessWordSuccess(res.answerCorrect, res.individualWordScore))
         })
         .catch(err => {
