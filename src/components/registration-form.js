@@ -4,6 +4,9 @@ import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import Input from './input';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
+import Button from './styled-components/Button';
+import Label from './styled-components/Label';
+import Form from './styled-components/Form';
 const passwordLength = length({min: 10, max: 72});
 const matchesPassword = matches('password');
 
@@ -18,42 +21,41 @@ export class RegistrationForm extends React.Component {
 
     render() {
         return (
-            <form
-                className="login-form"
+            <Form
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-                <label htmlFor="firstName">First name</label>
+                <Label htmlFor="firstName">First name</Label>
                 <Field component={Input} type="text" name="firstName" />
-                <label htmlFor="lastName">Last name</label>
+                <Label htmlFor="lastName">Last name</Label>
                 <Field component={Input} type="text" name="lastName" />
-                <label htmlFor="username">Username</label>
+                <Label htmlFor="username">Username</Label>
                 <Field
                     component={Input}
                     type="text"
                     name="username"
                     validate={[required, nonEmpty, isTrimmed]}
                 />
-                <label htmlFor="password">Password</label>
+                <Label htmlFor="password">Password</Label>
                 <Field
                     component={Input}
                     type="password"
                     name="password"
                     validate={[required, passwordLength, isTrimmed]}
                 />
-                <label htmlFor="passwordConfirm">Confirm password</label>
+                <Label htmlFor="passwordConfirm">Confirm password</Label>
                 <Field
                     component={Input}
                     type="password"
                     name="passwordConfirm"
                     validate={[required, nonEmpty, matchesPassword]}
                 />
-                <button
+                <Button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
                     Register
-                </button>
-            </form>
+                </Button>
+            </Form>
         );
     }
 }
