@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import { ThemeProvider } from "styled-components";
+// import {Button, Wrapper, HeaderText, AnswerBox, DothrakiWord, Nav, Option, Feedback, Form} from "./styled-components/index";
 import Button from "./styled-components/Button";
 import Wrapper from "./styled-components/Wrapper";
 import HeaderText from "./styled-components/HeaderText";
@@ -9,7 +10,12 @@ import AnswerBox from './styled-components/AnswerBox';
 import DothrakiWord from './styled-components/DothrakiWord';
 import Nav from './styled-components/Nav';
 import Option from './styled-components/Option'
+import FeedbackSection from './styled-components/FeedbackSection';
+import Form from './styled-components/Form';
 import Feedback from './styled-components/Feedback';
+import Image from './styled-components/Image';
+import Paragraph from './styled-components/Paragraph';
+import Stats from './styled-components/Stats'
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
@@ -54,6 +60,9 @@ export class Dashboard extends React.Component {
             font: "Calibri"
           };
 
+        let wrong = this.props.feedback==="You're Wrong!";
+        let correct = this.props.feedback==="Excellent!";
+
         return (
             <ThemeProvider theme={theme}>
             <Wrapper> 
@@ -64,32 +73,30 @@ export class Dashboard extends React.Component {
               </Nav>  
               <HeaderText>Welcome {this.props.name}</HeaderText>
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
-              <form>
+              <Form>
                 <AnswerBox disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
                 {!this.props.displayFeedback && <Button type="submit" primary onClick={(e) => this.guess(e)}>Guess</Button>}
-              </form>
+              </Form>
               {this.props.displayFeedback && 
-              (<Feedback>
+              (<FeedbackSection correct={correct} wrong={wrong}>
                 {
-                    this.props.feedback==="You're Wrong!" ?
-                    <div>
-                        <p>Yer ojila! {this.props.feedback}</p> 
-                        <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> 
-                        <img src={wrongGif}></img>
-                    </div> 
+                    wrong ?
+                    <Feedback>
+                        <Paragraph>Yer ojila! {this.props.feedback}</Paragraph> 
+                        <Paragraph>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</Paragraph> 
+                        <Image src={wrongGif} alt="wrong gif"></Image>
+                    </Feedback> 
+                    :
+                    correct ?
+                    <Feedback>
+                        <Paragraph>Athdavrazar! {this.props.feedback}</Paragraph> 
+                        <Paragraph>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</Paragraph> 
+                        <Image src={correctGif}></Image>
+                    </Feedback> 
                     : ""
                 }
-                {
-                    this.props.feedback==="Excellent!" ?
-                    <div>
-                        <p>Athdavrazar! {this.props.feedback}</p> 
-                        <p>The correct translation for    {this.props.word.data.dothraki} is: {this.props.word.data.english}</p> 
-                        <img src={correctGif}></img>
-                    </div> 
-                    : ""
-                }
-                <p>Your average score on this word is: {this.props.individualWordScore}% </p>
-              </Feedback>)
+                <Stats>Your average score on this word is: {this.props.individualWordScore}% </Stats>
+              </FeedbackSection>)
               }
               {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
             </Wrapper>
