@@ -19,5 +19,7 @@ export default styled.button`
   &:hover, &:focus{
     color: brown;
   }
+  font-size: ${props => (props.close && "20px")};
+  width: ${props => (props.close && "100px")};
 
 `;

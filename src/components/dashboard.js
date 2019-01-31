@@ -59,7 +59,6 @@ export class Dashboard extends React.Component {
 
       handleOverallProgress(){
         this.props.dispatch(fetchOverallProgress(this.props.id));
-
       }
       exitOverall(){
           this.props.dispatch(setOverallProgress())
@@ -82,8 +81,10 @@ export class Dashboard extends React.Component {
                   <Option onClick={() => this.handleOverallProgress()}>Progress</Option>
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
-              <HeaderText>Welcome {this.props.username}</HeaderText>
-              {this.props.overallFeedback && (<Stats>Your overall score is: {this.props.overallScore}% <Button onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
+              <HeaderText>Welcome {this.props.firstName}</HeaderText>
+              
+              {this.props.overallFeedback && (<Stats overall>{this.props.firstName}, your overall score is: <Strong>{this.props.overallScore}% </Strong><Button close onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
+
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <Form>
                 <AnswerBox placeholder="Guess here" disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
@@ -115,6 +116,7 @@ const mapStateToProps = state => {
     console.log(state)
     return {
         username: state.auth.currentUser.username,
+        firstName: currentUser.firstName,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
         word: state.word,
         id: state.auth.currentUser.id,
