@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import Wrapper from './styled-components/Wrapper';
 
 export default () => Component => {
     function RequiresLogin(props) {
         const {authenticating, loggedIn, error, ...passThroughProps} = props;
         if (authenticating) {
-            return <div>Logging in...</div>;
+            return <Wrapper>Logging in...</Wrapper>;
         } else if (!loggedIn || error) {
             return <Redirect to="/" />;
         }

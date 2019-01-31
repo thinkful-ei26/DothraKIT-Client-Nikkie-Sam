@@ -1,11 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import Wrapper from './styled-components/Wrapper'
 
 
 import LoginForm from './login-form';
-// import Wrapper from './styled-components/Wrapper';
+import HeaderText from './styled-components/HeaderText';
+import Paragraph from './styled-components/Paragraph';
+import Link from './styled-components/Link';
+
 
 export function LandingPage(props) {
     // If we are logged in redirect straight to the user's dashboard
@@ -15,7 +18,11 @@ export function LandingPage(props) {
 
     return (
         <Wrapper>
-            <h2>Welcome to Foo App</h2>
+            <HeaderText>Welcome to DothraKIT</HeaderText>
+            <Paragraph>With the final season of GOT coming out it's time to brush up on your Dothraki!</Paragraph>
+            <Paragraph>DothraKIT uses an advanced algorithm to ensure you are learning efficiently.</Paragraph>
+            <Paragraph>Register to make a Profile or check it out with Username: Khaleesi, Password: ilovedragons</Paragraph>
+            
             <LoginForm />
             <Link to="/register">Register</Link>
         </Wrapper>
