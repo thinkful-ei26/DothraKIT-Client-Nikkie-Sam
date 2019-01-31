@@ -64,7 +64,7 @@ export class Dashboard extends React.Component {
     render() {
         console.log('FEEDBACK IS', this.props.feedback);
         const theme = {
-            font: "Calibri"
+            fontFamily: 'Montserrat',
           };
 
         let wrong = this.props.feedback==="You're Wrong!";
@@ -74,14 +74,14 @@ export class Dashboard extends React.Component {
             <ThemeProvider theme={theme}>
             <Wrapper> 
               <Nav>
-                  <Option>DothraKIT</Option>
+                  <Option appTitle>DothraKIT</Option>
                   <Option onClick={() => this.handleOverallProgress()}>Progress</Option>
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
-              <HeaderText>Welcome {this.props.name}</HeaderText>
+              <HeaderText>Welcome {this.props.username}</HeaderText>
               <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
               <Form>
-                <AnswerBox disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
+                <AnswerBox placeholder="Guess here" disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
                 {!this.props.displayFeedback && <Button type="submit" onClick={(e) => this.guess(e)}>Guess</Button>}
               </Form>
               {this.props.displayFeedback && 

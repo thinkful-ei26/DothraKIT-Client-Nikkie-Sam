@@ -7,4 +7,5 @@ export default styled.input`
   background: papayawhip;
   box-sizing: border-box;
   text-align: center;
+  border: none;
 `;

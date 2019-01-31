@@ -8,7 +8,16 @@ export default styled.button`
   text-align: center;
   text-decoration: none;
   display: block;
-  font-size: 16px;
+  font-size: 30px;
+  letter-spacing:4px;
   margin: auto;
-  width: 150px;
+  width: 300px;
+  margin-top: 30px;
+  cursor: pointer;
+  font-family: 'Permanent Marker', cursive;
+  transition: .5s;
+  &:hover, &:focus{
+    color: brown;
+  }
+
 `;
