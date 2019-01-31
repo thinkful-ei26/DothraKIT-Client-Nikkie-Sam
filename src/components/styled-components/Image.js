@@ -9,7 +9,7 @@ export default styled.img`
     transform: scaleX(-1);
   `}
   ${props => props.sword && `
-    width: 70px;
-    height: 100px;
+    width: 90px;
+    height: 120px;
   `}
 `;

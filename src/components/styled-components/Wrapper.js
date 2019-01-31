@@ -1,20 +1,29 @@
 import styled from "styled-components";
+import {tan} from "./variables";
 
 export default styled.section`
-  margin: auto;
+  margin: 0px auto;
   ${props => props.parent && `
-    display: flex;
-    flex-direction: column;
     height: 100vh;
     background-color: black;
+    padding: 20px 0px;
   `}
+  ${props => props.welcome && `
+    display:flex;
+    border: 2px solid ${tan};
+    padding: 10px;
+    width: 95%;
+    margin-bottom: 20px;
+    @media (min-width: 850px) {
+      width:50%;
+    }
+`}
   ${props => props.child && `
-    margin: auto;
-    width: 100%;
+    width: 95%;
     border: 2px solid black;
-    background-color: #e2c68e;
+    background-color: ${tan};
     padding: 30px 0px;
-    @media (min-width: 700px) {
+    @media (min-width: 850px) {
       width:50%;
     }
   `}

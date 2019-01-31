@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {tan} from "./variables";
 
 export default styled.a`
   font-family: ${props => (props.appTitle && "'Permanent Marker', cursive")};
@@ -8,7 +9,7 @@ export default styled.a`
   transition: 1s;
   margin: auto;
   &:hover{
-    background-color:#e2c68e;
+    background-color:${tan};
     color: black; 
     cursor: pointer;
   }

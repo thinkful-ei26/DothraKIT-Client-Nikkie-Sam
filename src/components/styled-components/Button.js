@@ -12,14 +12,16 @@ export default styled.button`
   letter-spacing:4px;
   margin: auto;
   width: 300px;
-  margin-top: 30px;
+  margin-top: 15px;
   cursor: pointer;
   font-family: 'Permanent Marker', cursive;
   transition: .5s;
   &:hover, &:focus{
     color: brown;
   }
-  font-size: ${props => (props.close && "20px")};
-  width: ${props => (props.close && "100px")};
+  ${props => (props.close && `
+    width: 100px;
+    font-size: 20px;
+  `)};
 
 `;

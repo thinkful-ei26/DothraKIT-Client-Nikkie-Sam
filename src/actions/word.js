@@ -1,5 +1,6 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
+import {fetchOverallProgress} from './overallProgress'
 
 export const FETCH_WORD_REQUEST = 'FETCH_WORD_REQUEST';
 export const fetchWordRequest = () => ({
@@ -79,6 +80,9 @@ export const guessWord = (id, answer) => (dispatch, getState) => {
         .then((res)=>{
             console.log('THE INDIV SCORE GOTTEN BACK IS',res.individualWordScore )
             dispatch(guessWordSuccess(res.answerCorrect, res.individualWordScore))
+        })
+        .then(()=>{
+            dispatch(fetchOverallProgress(id));
         })
         .catch(err => {
             dispatch(guessWordError(err));

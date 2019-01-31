@@ -5,7 +5,7 @@ export default styled.input`
   height: 80px;
   margin: auto;
   padding: 1em;
-  background: papayawhip;
+  background-color: #ffe5bc;
   box-sizing: border-box;
   text-align: center;
   border: 1px solid transparent;

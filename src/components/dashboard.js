@@ -21,11 +21,11 @@ import About from './styled-components/About'
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
-import {fetchOverallProgress, setOverallProgress} from '../actions/overallProgress';
+import {fetchOverallProgress} from '../actions/overallProgress';
 
 import wrongGif from '../img/wrong.gif';
 import correctGif from '../img/correct.gif'
-import sword from '../img/sword.png';
+import sword from '../img/red-sword.png';
 
 export class Dashboard extends React.Component {   
     constructor(props){
@@ -38,6 +38,7 @@ export class Dashboard extends React.Component {
     componentDidMount() {
         console.log('the id is', this.props.id)
         this.props.dispatch(fetchWord(this.props.id));
+        this.props.dispatch(fetchOverallProgress(this.props.id));
     }
 
     logOut() {
@@ -58,13 +59,6 @@ export class Dashboard extends React.Component {
         this.props.dispatch(displayFeedback(false));
         this.props.dispatch(fetchWord(this.props.id));
       }
-
-      handleOverallProgress(){
-        this.props.dispatch(fetchOverallProgress(this.props.id));
-      }
-      exitOverall(){
-          this.props.dispatch(setOverallProgress())
-      }
     
     render() {
         console.log('FEEDBACK IS', this.props.feedback);
@@ -80,24 +74,24 @@ export class Dashboard extends React.Component {
             <Wrapper> 
               <Nav>
                   <Option appTitle>DothraKIT</Option>
-                  <Option onClick={() => this.handleOverallProgress()}>Progress</Option>
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
-              <Wrapper parent> 
-              <Wrapper child>
-                <HeaderText>Welcome {this.props.firstName}</HeaderText>
-                <About>
+              <Wrapper parent>
+                <Wrapper welcome>
                     <Image sword src={sword}></Image>
-                    <Paragraph rules>The rules are simple.</Paragraph>
+                    <Wrapper>
+                        <HeaderText>{this.props.firstName}</HeaderText>
+                        <Paragraph rules>The rules are simple. Learn the word. Get it right. You live. Or else...well, best not to get on Khal's bad side</Paragraph>
+                        <Paragraph progress>Your overall progress with the Dothraki language is: <Strong>{this.props.overallScore}% </Strong></Paragraph>
+                    </Wrapper>
                     <Image sword flipHoriz src={sword}></Image>
-                </About>
+                </Wrapper>
+              <Wrapper child>
                 
-                {this.props.overallFeedback && (<Stats overall>{this.props.firstName}, your overall score is: <Strong>{this.props.overallScore}% </Strong><Button close onClick={() => this.exitOverall()}>Ok</Button></Stats>)}
-
                 <DothrakiWord>{this.props.word.data.dothraki}</DothrakiWord>
                 <Form>
                     <AnswerBox primary placeholder="Guess here" disabled={this.state.disabled} ref={input => this.answerInput = input} type='text'></AnswerBox>
-                    {!this.props.displayFeedback && <Button type="submit" onClick={(e) => this.guess(e)}>Guess</Button>}
+                    {!this.props.displayFeedback && <Button type="submit" onClick={(e) => this.guess(e)}>Submit</Button>}
                 </Form>
                 {this.props.displayFeedback && 
                 (<FeedbackSection correct={correct} wrong={wrong}>
@@ -111,7 +105,6 @@ export class Dashboard extends React.Component {
                             {
                                 wrong ?  <Image gif src={wrongGif} alt="wrong gif"></Image> :  <Image gif src={correctGif} alt="correct gif"></Image>
                             }
-                        
                         </Feedback> 
                     }
                 </FeedbackSection>)
@@ -138,7 +131,6 @@ const mapStateToProps = state => {
         displayFeedback: state.word.displayFeedback,
         feedback: state.word.feedback,
         individualWordScore: state.word.individualWordScore,
-        overallFeedback: state.overallProgress.displayFeedback,
         overallScore: state.overallProgress.data
     };
 };
