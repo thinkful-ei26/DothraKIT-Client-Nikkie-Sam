@@ -14,4 +14,8 @@ export default styled(Link)`
     color: black; 
     cursor: pointer;
   }
+  span
+    &:hover{
+      color: white;
+    }
 `;

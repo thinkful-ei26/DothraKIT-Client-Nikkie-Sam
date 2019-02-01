@@ -27,5 +27,18 @@ export default styled.section`
       width:50%;
     }
   `}
-
+  ${props => props.glossary && `
+  width: 95%;
+  border: 2px solid black;
+  background-color: ${lightBeige};
+  padding: 30px 0px;
+  @media (min-width: 850px) {
+    width:75%;
+  }
+`}
+  ${props => props.words && `
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  `}
 `;
