@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import {lightBeige} from './variables'
 
 export default styled.button`
   background-color: black;
   border: none;
-  color: white;
+  color: ${lightBeige};
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -11,7 +12,7 @@ export default styled.button`
   font-size: 30px;
   letter-spacing:4px;
   margin: auto;
-  width: 300px;
+  width: 100%;
   margin-top: 15px;
   cursor: pointer;
   font-family: 'Permanent Marker', cursive;
@@ -19,9 +20,8 @@ export default styled.button`
   &:hover, &:focus{
     color: brown;
   }
-  ${props => (props.close && `
-    width: 100px;
-    font-size: 20px;
+  ${props => (props.next && `
+    width: 75%;
   `)};
 
 `;

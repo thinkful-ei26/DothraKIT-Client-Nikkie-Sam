@@ -41,6 +41,13 @@ export class Dashboard extends React.Component {
         this.props.dispatch(fetchOverallProgress(this.props.id));
     }
 
+    componentWillUnmount(){
+        //if user tries to logout or leave this page while it's still on the feedback and they haven't clicked next, must click next for them: 
+        if(this.state.disabled===true){
+            this.handleNext();
+        }
+    }
+
     logOut() {
         this.props.dispatch(clearAuth());
         clearAuthToken();
@@ -49,7 +56,6 @@ export class Dashboard extends React.Component {
     guess(e){
         e.preventDefault();
         this.setState({disabled: true});
-        console.log(this.answerInput.value);
         this.props.dispatch(guessWord(this.props.id, this.answerInput.value));
       }
 
@@ -109,7 +115,7 @@ export class Dashboard extends React.Component {
                     }
                 </FeedbackSection>)
                 }
-                {this.props.displayFeedback && <Button onClick={() => this.handleNext()}>Next Word</Button>}
+                {this.props.displayFeedback && <Button next onClick={() => this.handleNext()}>Next Word</Button>}
               </Wrapper>
             </Wrapper>
             </Wrapper>

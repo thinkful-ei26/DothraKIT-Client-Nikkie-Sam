@@ -11,5 +11,8 @@ export default styled.img`
   ${props => props.sword && `
     width: 90px;
     height: 120px;
+    @media (max-width: 400px) {
+      display:none;
+    }
   `}
 `;

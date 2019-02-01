@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import {tan} from "./variables";
+import {tan, lightBeige} from "./variables";
 
 export default styled.section`
   margin: 0px auto;
   ${props => props.parent && `
-    height: 100vh;
+    min-height: 1000px;
     background-color: black;
     padding: 20px 0px;
   `}
   ${props => props.welcome && `
     display:flex;
-    border: 2px solid ${tan};
+    background: ${lightBeige};
     padding: 10px;
     width: 95%;
-    margin-bottom: 20px;
+    margin: 20px auto 40px auto;
     @media (min-width: 850px) {
       width:50%;
     }
