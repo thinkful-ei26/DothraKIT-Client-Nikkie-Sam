@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import { ThemeProvider } from "styled-components";
+import Link from './styled-components/Link';
+import Logo from './styled-components/Logo';
 // import {Button, Wrapper, HeaderText, AnswerBox, DothrakiWord, Nav, Option, Feedback, Form} from "./styled-components/index";
 import Button from "./styled-components/Button";
 import Wrapper from "./styled-components/Wrapper";
@@ -79,7 +81,8 @@ export class Dashboard extends React.Component {
             <ThemeProvider theme={theme}>
             <Wrapper> 
               <Nav>
-                  <Option appTitle>DothraKIT</Option>
+                  <Link to="/dashboard"><Logo>DothraKIT</Logo></Link>
+                  <Link to="/glossary">Glossary</Link>
                   <Option onClick={() => this.logOut()}>LogOut</Option>
               </Nav>  
               <Wrapper parent>

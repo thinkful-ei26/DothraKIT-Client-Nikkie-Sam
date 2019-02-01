@@ -4,6 +4,7 @@ import {Route, withRouter} from 'react-router-dom';
 
 import LandingPage from './landing-page';
 import Dashboard from './dashboard';
+import Glossary from './glossary';
 import RegistrationPage from './registration-page';
 import {refreshAuthToken} from '../actions/auth';
 import Wrapper from './styled-components/Wrapper';
@@ -43,6 +44,7 @@ export class App extends React.Component {
             <Wrapper>
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/glossary" component={Glossary} />
                 <Route exact path="/register" component={RegistrationPage} />
             </Wrapper>
         );
