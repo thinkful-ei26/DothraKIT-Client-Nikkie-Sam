@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {lightBeige} from './variables'
+import {lightBeige, forestGreen, darkRed} from './variables'
 
 export default styled.button`
   background-color: black;
@@ -18,10 +18,15 @@ export default styled.button`
   font-family: 'Permanent Marker', cursive;
   transition: .5s;
   &:hover, &:focus{
-    color: brown;
+    color: ${darkRed};
   }
   ${props => (props.next && `
     width: 75%;
+  `)};
+  ${props => (props.logIn && `
+    &:hover, &:focus{
+      color: ${forestGreen};
+    }
   `)};
   ${props => (props.signIn && `
   width: 100%;

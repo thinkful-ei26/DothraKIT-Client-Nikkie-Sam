@@ -22,12 +22,13 @@ export function LandingPage(props) {
                 <HeaderText>Welcome to DothraKIT</HeaderText>
                 <Paragraph blurb>With the final season of GOT coming out it's time to brush up on your Dothraki phrases!</Paragraph>
                 <Paragraph blurb>DothraKIT uses an advanced spaced repeitition algorithm to ensure you are learning efficiently.</Paragraph>
+                <Paragraph blurb>The rules are simple. Learn the word. Get it right. You live. Or else...well, best not to get on Khal's bad side.</Paragraph>
             </Wrapper>
-            <Wrapper child>
+            <Wrapper child login>
                 <HeaderText>Login</HeaderText>
                 <LoginForm />
             </Wrapper>
-            <Wrapper child>
+            <Wrapper child register>
                 <HeaderText>Register</HeaderText>
                 <RegistrationForm/>
             </Wrapper>

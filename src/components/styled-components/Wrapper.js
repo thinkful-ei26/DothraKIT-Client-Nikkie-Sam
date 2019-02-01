@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {tan, lightBeige} from "./variables";
+import {tan, lightBeige, forestGreen, darkRed} from "./variables";
 
 export default styled.section`
   margin: 0px auto;
@@ -41,10 +41,25 @@ export default styled.section`
     width:75%;
   }
 `}
-  ${props => props.words && `
-    display:flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding-top: 20px;
-  `}
+
+${props => props.words && `
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 20px;
+`}
+
+${props => props.login && `
+  background: ${forestGreen};
+`}
+
+${props => props.register && `
+  background: ${darkRed};
+`}
+
+
+${props => props.blurb && `
+  padding: 25px;
+  margin-bottom: 30px;
+`}
 `;

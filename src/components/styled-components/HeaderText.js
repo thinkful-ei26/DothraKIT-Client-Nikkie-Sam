@@ -7,4 +7,5 @@ export default styled.h1`
   text-align:center;
   color: black;
   margin: 0;
+  padding-bottom: 20px;
 `;
