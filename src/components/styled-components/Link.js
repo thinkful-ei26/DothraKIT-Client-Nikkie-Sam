@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import {Link} from 'react-router-dom';
-import {tan} from './variables';
+import {tan, lightBeige} from './variables';
 
 
 export default styled(Link)`
   text-decoration: none;
   color: black;
-  padding: 20px;
+  padding: 10px;
   transition: 1s;
-  margin: auto;
+  font-size: 12px;
+  display: inline-block;
   &:hover, &:focus{
-    background-color:${tan};
-    color: black; 
+    color: ${lightBeige}; 
     cursor: pointer;
+  }
+  @media(min-width:420px){
+    font-size: 15px;
+    padding: 20px;
   }
 `;

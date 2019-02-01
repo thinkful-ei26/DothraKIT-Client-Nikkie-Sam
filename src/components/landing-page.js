@@ -13,11 +13,12 @@ import RegistrationForm from './registration-form';
 export function LandingPage(props) {
     // If we are logged in redirect straight to the user's dashboard
     if (props.loggedIn) {
+        console.log('here');
         return <Redirect to="/dashboard" />;
     }
 
     return (
-        <Wrapper parent>
+        <Wrapper parent landing>
             <Wrapper welcome blurb>
                 <HeaderText>Welcome to DothraKIT</HeaderText>
                 <Paragraph blurb>With the final season of GOT coming out it's time to brush up on your Dothraki phrases!</Paragraph>

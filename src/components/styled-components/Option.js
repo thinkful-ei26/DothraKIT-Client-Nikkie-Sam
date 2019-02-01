@@ -1,13 +1,16 @@
 import styled from "styled-components";
-import {tan} from "./variables";
+import {tan, lightBeige} from "./variables";
 
 export default styled.a`
-  padding: 20px;
   transition: 1s;
-  margin: auto;
+  padding: 20px;
+  display: inline-block;
+  font-size: 12px;
   &:hover, &:focus{
-    background-color:${tan};
-    color: black; 
+    color: ${lightBeige}; 
     cursor: pointer;
+  }
+  @media(min-width:420px){
+    font-size: 15px;
   }
 `;

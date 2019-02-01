@@ -41,7 +41,7 @@ export class App extends React.Component {
     render() {
         return (
             <Wrapper>
-                <Route path="/" component={LandingPage} />
+                <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/glossary" component={Glossary} />
             </Wrapper>

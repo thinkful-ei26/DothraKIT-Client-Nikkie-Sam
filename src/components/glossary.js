@@ -2,30 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import { ThemeProvider } from "styled-components";
+import Navbar from './navbar';
 import Wrapper from "./styled-components/Wrapper";
-import Table from "./styled-components/Table";
 import Column from "./styled-components/Column";
 import Cell from "./styled-components/Cell";
 import HeaderText from "./styled-components/HeaderText";
-import Link from './styled-components/Link';
-import Logo from './styled-components/Logo';
-import Nav from './styled-components/Nav';
-import Option from './styled-components/Option'
-import Paragraph from './styled-components/Paragraph';
-import Strong from './styled-components/Strong';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
-import { all } from 'q';
 
 export class Glossary extends React.Component {   
  
     componentDidMount() {
       console.log('THE WORDS ARE', this.props.allWords);
-    }
-
-    logOut() {
-        this.props.dispatch(clearAuth());
-        clearAuthToken();
     }
     
     render() {
@@ -44,11 +32,7 @@ export class Glossary extends React.Component {
       return (
           <ThemeProvider theme={theme}>
           <Wrapper> 
-            <Nav>
-              <Link to="/dashboard"><Logo>DothraKIT</Logo></Link>
-              <Link to="/glossary">Glossary</Link>
-              <Option onClick={() => this.logOut()}>LogOut</Option>
-            </Nav>  
+          <Navbar/> 
             <Wrapper parent>
             <Wrapper table>
                   <HeaderText>Glossary</HeaderText>

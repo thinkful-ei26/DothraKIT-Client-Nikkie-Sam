@@ -2,16 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import { ThemeProvider } from "styled-components";
-import Link from './styled-components/Link';
-import Logo from './styled-components/Logo';
+import Navbar from './navbar'
 // import {Button, Wrapper, HeaderText, AnswerBox, DothrakiWord, Nav, Option, Feedback, Form} from "./styled-components/index";
 import Button from "./styled-components/Button";
 import Wrapper from "./styled-components/Wrapper";
 import HeaderText from "./styled-components/HeaderText";
 import AnswerBox from './styled-components/AnswerBox';
 import DothrakiWord from './styled-components/DothrakiWord';
-import Nav from './styled-components/Nav';
-import Option from './styled-components/Option'
 import FeedbackSection from './styled-components/FeedbackSection';
 import Form from './styled-components/Form';
 import Feedback from './styled-components/Feedback';
@@ -19,7 +16,6 @@ import Image from './styled-components/Image';
 import Paragraph from './styled-components/Paragraph';
 import Stats from './styled-components/Stats';
 import Strong from './styled-components/Strong';
-import About from './styled-components/About'
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {fetchWord, guessWord, displayFeedback} from '../actions/word';
@@ -80,17 +76,14 @@ export class Dashboard extends React.Component {
         return (
             <ThemeProvider theme={theme}>
             <Wrapper> 
-              <Nav>
-                  <Link to="/dashboard"><Logo>DothraKIT</Logo></Link>
-                  <Link to="/glossary">Glossary</Link>
-                  <Option onClick={() => this.logOut()}>LogOut</Option>
-              </Nav>  
+            <Navbar/>
               <Wrapper parent>
                 <Wrapper welcome>
                     <Image sword src={sword}></Image>
                     <Wrapper>
                         <HeaderText>{this.props.firstName}</HeaderText>
-                        <Paragraph rules>The rules are simple. Learn the word. Get it right. You live. Or else...well, best not to get on Khal's bad side</Paragraph>
+                        <Paragraph blurb>DothraKIT uses an advanced spaced repeitition algorithm to ensure you are learning efficiently.</Paragraph>
+                        <Paragraph blurb>The rules are simple. Learn the word. Get it right. You live. Or else...well, best not to get on Khal's bad side.</Paragraph>
                         <Paragraph progress>Your overall progress with the Dothraki language is: <Strong>{this.props.overallScore}% </Strong></Paragraph>
                     </Wrapper>
                     <Image sword flipHoriz src={sword}></Image>

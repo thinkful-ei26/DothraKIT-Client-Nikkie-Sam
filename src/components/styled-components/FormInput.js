@@ -10,4 +10,7 @@ export default styled.input`
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
+  &::-webkit-input-placeholder {
+    color: red;
+  }
   `;
