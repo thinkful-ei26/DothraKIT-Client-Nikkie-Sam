@@ -13,7 +13,7 @@ export default styled.input`
   font-family: 'Montserrat', sans-serif;
   transition: .5s;
   ${props => !props.disabled && `
-  &:hover {
+  &:hover, &:focus {
     outline: 0;
     border: 2px solid black;
   }

@@ -9,13 +9,9 @@ export default styled(Link)`
   padding: 20px;
   transition: 1s;
   margin: auto;
-  &:hover{
+  &:hover, &:focus{
     background-color:${tan};
     color: black; 
     cursor: pointer;
   }
-  span
-    &:hover{
-      color: white;
-    }
 `;

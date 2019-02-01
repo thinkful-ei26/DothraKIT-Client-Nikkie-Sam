@@ -8,8 +8,12 @@ export default styled.section`
     background-color: black;
     padding: 20px 0px;
   `}
-  ${props => props.welcome && `
+
+  ${props => props.welcome && !props.about && `
     display:flex;
+  `}
+
+  ${props => props.welcome && `
     background: ${lightBeige};
     padding: 10px;
     width: 95%;
@@ -27,7 +31,7 @@ export default styled.section`
       width:50%;
     }
   `}
-  ${props => props.glossary && `
+  ${props => props.table && `
   width: 95%;
   border: 2px solid black;
   background-color: ${lightBeige};
@@ -40,5 +44,6 @@ export default styled.section`
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
+    padding-top: 20px;
   `}
 `;

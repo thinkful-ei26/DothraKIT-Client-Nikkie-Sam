@@ -5,7 +5,7 @@ export default styled.a`
   padding: 20px;
   transition: 1s;
   margin: auto;
-  &:hover{
+  &:hover, &:focus{
     background-color:${tan};
     color: black; 
     cursor: pointer;

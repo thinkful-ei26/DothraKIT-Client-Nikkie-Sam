@@ -33,12 +33,12 @@ export class Glossary extends React.Component {
         fontFamily: 'Montserrat',
       };
 
-      let allDothrakiWords=[<Cell tableHead>Dothraki</Cell>];
-      let allEnglishwords=[<Cell tableHead>English</Cell>];
+      let allDothrakiWords=[<Cell key={this.props.allWords.length} tableHead>Dothraki</Cell>];
+      let allEnglishwords=[<Cell key={this.props.allWords.length} tableHead>English</Cell>];
 
       for(let i=0; i<this.props.allWords.length; i++){
-        allDothrakiWords.push(<Cell>{this.props.allWords[i].dothraki}</Cell>);
-        allEnglishwords.push(<Cell>{this.props.allWords[i].english}</Cell>);
+        allDothrakiWords.push(<Cell dothraki key={i}>{this.props.allWords[i].dothraki}</Cell>);
+        allEnglishwords.push(<Cell key={i}>{this.props.allWords[i].english}</Cell>);
       }
       
       return (
@@ -50,14 +50,12 @@ export class Glossary extends React.Component {
               <Option onClick={() => this.logOut()}>LogOut</Option>
             </Nav>  
             <Wrapper parent>
-            <Wrapper glossary>
-              <Table>
+            <Wrapper table>
                   <HeaderText>Glossary</HeaderText>
                   <Wrapper words>
                     <Column dothraki>{allDothrakiWords}</Column>
                     <Column english>{allEnglishwords}</Column>
                   </Wrapper>
-              </Table>
             </Wrapper>
             </Wrapper>
           </Wrapper>
