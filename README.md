@@ -19,7 +19,7 @@ With the final season of GOT coming out it's time to brush up on your Dothraki p
 :white_check_mark: Users can see their overall progress at the top of their dashboard
 
 :white_check_mark: Users can look over the Dothraki phrases at any time by clicking on the glossary tab in the navbar 
-<img src="https://imgur.com/aq6C24l" alt="homepage" width="400px" />
+<img src="https://i.imgur.com/aq6C24l.png" alt="homepage" width="400px" />
 
 ## Tech Stack 
 Full-stack app with:
