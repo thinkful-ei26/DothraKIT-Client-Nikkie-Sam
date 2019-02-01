@@ -5,14 +5,14 @@ With the final season of GOT coming out it's time to brush up on your Dothraki p
 
 ## Features
 :white_check_mark: Users can create an account for themselves with their first name, last name, username, and password
-<img src="https://imgur.com/9qGEExz" alt="login/register" width="400px" />
+<img src="https://i.imgur.com/9qGEExz.png" alt="login/register" width="400px" />
 
 :white_check_mark: Upon logging in, users will be directed to a dashboard (home page) where they can start learning Dothraki!
-<img src="https://imgur.com/35s48yu" alt="homepage" width="400px" />
+<img src="https://i.imgur.com/35s48yu.png" alt="homepage" width="400px" />
 
 :white_check_mark: After users submit their answer for the dothraki phrase, they will be given proper feedback which includes the correct translation in English, their mastery of the given phrase, and a funny surprise to keep them entertained
-<img src="https://imgur.com/CrqYlh5" alt="homepage" width="400px" />
-<img src="https://imgur.com/66TnGX6" alt="homepage" width="400px" />
+<img src="https://i.imgur.com/66TnGX6.png" alt="homepage" width="400px" />
+<img src="https://i.imgur.com/CrqYlh5.jpg" alt="homepage" width="400px" />
 
 :white_check_mark: The order in which the phrases appear is based on a spaced repeitition algorithm; the more often the user gets a given phrase correct, the later it'll start to appear, and vice versa
 
