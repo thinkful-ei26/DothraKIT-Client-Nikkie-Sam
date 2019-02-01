@@ -18,16 +18,17 @@ export function LandingPage(props) {
 
     return (
         <Wrapper parent>
-            <Wrapper welcome about>
+            <Wrapper welcome blurb>
                 <HeaderText>Welcome to DothraKIT</HeaderText>
-                <Paragraph>With the final season of GOT coming out it's time to brush up on your Dothraki!</Paragraph>
-                <Paragraph>DothraKIT uses an advanced algorithm to ensure you are learning efficiently.</Paragraph>
-                <Paragraph>Register to make a Profile or check it out with Username: Khaleesi, Password: ilovedragons</Paragraph>    
+                <Paragraph blurb>With the final season of GOT coming out it's time to brush up on your Dothraki phrases!</Paragraph>
+                <Paragraph blurb>DothraKIT uses an advanced spaced repeitition algorithm to ensure you are learning efficiently.</Paragraph>
             </Wrapper>
             <Wrapper child>
+                <HeaderText>Login</HeaderText>
                 <LoginForm />
             </Wrapper>
             <Wrapper child>
+                <HeaderText>Register</HeaderText>
                 <RegistrationForm/>
             </Wrapper>
         </Wrapper>

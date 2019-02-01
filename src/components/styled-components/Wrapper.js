@@ -9,7 +9,7 @@ export default styled.section`
     padding: 20px 0px;
   `}
 
-  ${props => props.welcome && !props.about && `
+  ${props => props.welcome && !props.blurb && `
     display:flex;
   `}
 
@@ -27,6 +27,7 @@ export default styled.section`
     border: 2px solid black;
     background-color: ${tan};
     padding: 30px 0px;
+    margin-bottom: 30px;
     @media (min-width: 850px) {
       width:50%;
     }

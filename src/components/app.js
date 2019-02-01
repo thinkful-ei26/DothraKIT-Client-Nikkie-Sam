@@ -5,7 +5,6 @@ import {Route, withRouter} from 'react-router-dom';
 import LandingPage from './landing-page';
 import Dashboard from './dashboard';
 import Glossary from './glossary';
-import RegistrationPage from './registration-page';
 import {refreshAuthToken} from '../actions/auth';
 import Wrapper from './styled-components/Wrapper';
 

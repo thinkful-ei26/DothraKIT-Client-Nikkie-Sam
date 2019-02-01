@@ -23,5 +23,14 @@ export default styled.button`
   ${props => (props.next && `
     width: 75%;
   `)};
+  ${props => (props.signIn && `
+  width: 100%;
+  @media (min-width: 500px) {
+    width:60%;
+  }
+  @media (min-width: 700px) {
+    max-width: 250px;
+  }
+`)};
 
 `;

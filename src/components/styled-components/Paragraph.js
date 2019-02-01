@@ -15,4 +15,9 @@ export default styled.p`
   ${props => props.progress && `
     color: ${forestGreen};
   `}
+  ${props => props.blurb && `
+    width: 75%;
+    margin: auto;
+    text-align: center;
+  `}
 `;
