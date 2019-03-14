@@ -13,7 +13,7 @@ import {clearAuthToken} from '../local-storage';
 export class Glossary extends React.Component {   
  
     componentDidMount() {
-      console.log('THE WORDS ARE', this.props.allWords);
+      // console.log('THE WORDS ARE', this.props.allWords);
     }
     
     render() {

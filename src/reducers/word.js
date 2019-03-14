@@ -41,7 +41,7 @@ export default function reducer(state = initialState, action) {
         });
     } 
     else if (action.type === GUESS_WORD_SUCCESS) {
-        console.log('the indiv word score is is', action.individualWordScore);
+        // console.log('the indiv word score is is', action.individualWordScore);
         return Object.assign({}, state, {
             loading: false,
             error: false,
@@ -51,7 +51,7 @@ export default function reducer(state = initialState, action) {
         });
     } 
     else if (action.type === DISPLAY_FEEDBACK) {
-        console.log('DISPLAY FEEDBACK REDUCER', action.bool);
+        // console.log('DISPLAY FEEDBACK REDUCER', action.bool);
         return Object.assign({}, state, {
             displayFeedback: action.bool
         });

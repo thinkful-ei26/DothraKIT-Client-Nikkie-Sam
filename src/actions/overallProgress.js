@@ -24,7 +24,7 @@ export const fetchOverallProgressError = error => ({
 });
 
 export const fetchOverallProgress = (id) => (dispatch, getState) => {
-    console.log('FETCHING OVERALLPROGRESS ACTION');
+    // console.log('FETCHING OVERALLPROGRESS ACTION');
     const authToken = getState().auth.authToken;
     dispatch(fetchOverallProgressRequest())
     return fetch(`${API_BASE_URL}/overallProgress/${id}`, {

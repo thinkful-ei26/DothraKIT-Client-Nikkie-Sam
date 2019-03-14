@@ -15,7 +15,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     if (action.type === FETCH_OVERALLPROGRESS_SUCCESS) {
-        console.log('overprogresss is ', action.data)
+        // console.log('overprogresss is ', action.data)
         return Object.assign({}, state, {
             data: action.data,
             error: null,

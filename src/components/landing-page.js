@@ -13,7 +13,7 @@ import RegistrationForm from './registration-form';
 export function LandingPage(props) {
     // If we are logged in redirect straight to the user's dashboard
     if (props.loggedIn) {
-        console.log('here');
+        // console.log('here');
         return <Redirect to="/dashboard" />;
     }
 

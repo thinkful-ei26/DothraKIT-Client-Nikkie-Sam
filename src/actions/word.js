@@ -20,7 +20,7 @@ export const fetchWordError = error => ({
 });
 
 export const fetchWord = (id) => (dispatch, getState) => {
-    console.log('FETCHING WORD ACTION');
+    // console.log('FETCHING WORD ACTION');
     const authToken = getState().auth.authToken;
     dispatch(fetchWordRequest())
     return fetch(`${API_BASE_URL}/word/${id}`, {
@@ -63,7 +63,7 @@ export const guessWordRequest = () => ({
 });
 
 export const guessWord = (id, answer) => (dispatch, getState) => {
-    console.log('GUESSING WORD ACTION SENDING', JSON.stringify(answer) );
+    // console.log('GUESSING WORD ACTION SENDING', JSON.stringify(answer) );
     const authToken = getState().auth.authToken;
     dispatch(guessWordRequest());
     return fetch(`${API_BASE_URL}/word/${id}`, {
@@ -78,7 +78,7 @@ export const guessWord = (id, answer) => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((res)=>{
-            console.log('THE INDIV SCORE GOTTEN BACK IS',res.individualWordScore )
+            // console.log('THE INDIV SCORE GOTTEN BACK IS',res.individualWordScore )
             dispatch(guessWordSuccess(res.answerCorrect, res.individualWordScore))
         })
         .then(()=>{

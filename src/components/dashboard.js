@@ -34,7 +34,7 @@ export class Dashboard extends React.Component {
         });
     }    
     componentDidMount() {
-        console.log('the id is', this.props.id)
+        // console.log('the id is', this.props.id)
         this.props.dispatch(fetchWord(this.props.id));
         this.props.dispatch(fetchOverallProgress(this.props.id));
     }
@@ -65,7 +65,7 @@ export class Dashboard extends React.Component {
       }
     
     render() {
-        console.log('FEEDBACK IS', this.props.feedback);
+        // console.log('FEEDBACK IS', this.props.feedback);
         const theme = {
             fontFamily: 'Montserrat',
           };
@@ -122,7 +122,7 @@ export class Dashboard extends React.Component {
 
 const mapStateToProps = state => {
     const {currentUser} = state.auth;
-    console.log(state)
+    // console.log(state)
     return {
         username: state.auth.currentUser.username,
         firstName: currentUser.firstName,
